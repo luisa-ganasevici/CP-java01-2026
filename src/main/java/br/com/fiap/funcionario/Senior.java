@@ -1,7 +1,9 @@
 package br.com.fiap.funcionario;
 
+import br.com.fiap.anotacao.Descricao;
 import jakarta.persistence.*;
 
+@Descricao(descricao = "senior")
 @Entity
 @Table(name = "Senior")
 

@@ -3,19 +3,24 @@ package br.com.fiap.funcionario;
 import br.com.fiap.anotacao.Descricao;
 import jakarta.persistence.*;
 
-@Descricao(nome = "")
+@Descricao(descricao = "funcionario")
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
 
     @Id
     @GeneratedValue
+
     @Column(name = "colunaId")
     private Long id;
 
-
+    @Column(name ="colunaNome")
     protected String nome;
+
+    @Column(name = "colunaHorasDeTrabalho")
     protected int horasTrabalhadas;
+
+    @Column(name ="colunaValorHora")
     protected double valorHora;
 
     public Funcionario() {

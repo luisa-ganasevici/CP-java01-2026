@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.*;
 
 
-@Descricao(nome = "Estagiário")
+@Descricao(descricao = "estagiário")
 @Entity
 @Table(name = "Estagiario")
 
