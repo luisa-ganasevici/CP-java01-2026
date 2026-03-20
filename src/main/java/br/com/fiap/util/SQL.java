@@ -1,22 +1,35 @@
 package br.com.fiap.util;
 
 import br.com.fiap.anotacao.Descricao;
+import jakarta.persistence.Table;
 
 public class SQL {
 
-    public void gerarSelect(Object obj) {
+    public String gerarSelect(Object obj) {
+        Class<?> classe = obj.getClass();
+        String tabela = getNomeTabela(classe);
+        return "SELECT * FROM " + tabela;
+    }
 
-        Class classe = obj.getClass();
+    public String gerarInsert(Object obj) {
+        Class<?> classe = obj.getClass();
+        String tabela = getNomeTabela(classe);
+        return "INSERT INTO " + tabela + " (VALORES DO OBJETO VIA REFLECTION)";
+    }
 
-        Descricao descricao = (Descricao) classe.getAnnotation(Descricao.class);
+    public String gerarDelete(Object obj, Long id) {
+        Class<?> classe = obj.getClass();
+        String tabela = getNomeTabela(classe);
+        return "DELETE FROM " + tabela + " WHERE id = " + id;
+    }
 
-        if (descricao != null) {
+    private String getNomeTabela(Class<?> classe) {
 
-            String nomeTabela = descricao.descricao();
-
-            String sql = "SELECT * FROM " + nomeTabela;
-
-            System.out.println(sql);
+        if (classe.isAnnotationPresent(Descricao.class)) {
+            return classe.getAnnotation(Descricao.class).descricao();
+        } else if (classe.isAnnotationPresent(Table.class)) {
+            return classe.getAnnotation(Table.class).name();
         }
+        return classe.getSimpleName().toUpperCase();
     }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="CLIENTE_ORACLE" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>br.com.fiap.funcionario.Funcionario</class>
+        <class>br.com.fiap.funcionario.Senior</class>
+        <class>br.com.fiap.funcionario.Estagiario</class>
+
+        <properties>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
+
+            <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl"/>
+
+            <property name="javax.persistence.jdbc.user" value="RMxxxxx"/>
+            <property name="javax.persistence.jdbc.password" value="sua_senha"/>
+        </properties>
+    </persistence-unit>
+</persistence>

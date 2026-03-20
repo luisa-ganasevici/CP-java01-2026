@@ -13,30 +13,30 @@ import jakarta.persistence.*;
 
 public class Estagiario extends Funcionario {
 
-    @Column(name = "colunaSupervisor")
-    private String supervisor;
+    @Column(name = "colunarelatorio")
+    private String relatorio;
 
     public Estagiario() {
     }
 
-    public Estagiario(String nome, int horasTrabalhadas, double valorHora, String supervisor) {
+    public Estagiario(String nome, int horasTrabalhadas, double valorHora, String relatorio) {
         super(nome, horasTrabalhadas, valorHora);
-        this.supervisor = supervisor;
+        this.relatorio = relatorio;
     }
 
-    public String getSupervisor() {
-        return supervisor;
+    public String getRelatorio() {
+        return relatorio;
     }
 
-    public void setSupervisor(String supervisor) {
-        this.supervisor = supervisor;
+    public void setRelatorio(String relatorio) {
+        this.relatorio = relatorio;
     }
 
     @Override
     public double calcularSalario() {
 
         double salarioNormal = horasTrabalhadas * valorHora;
-        return salarioNormal * 0.8; // estagiário recebe 80% do salário
+        return salarioNormal * 0.8;
 
     }
 
@@ -46,7 +46,7 @@ public class Estagiario extends Funcionario {
         System.out.println("Funcionário Estagiário: " + nome);
         System.out.println("Horas trabalhadas: " + horasTrabalhadas);
         System.out.println("Valor por hora: " + valorHora);
-        System.out.println("Supervisor: " + supervisor);
+        System.out.println("relatorio: " + relatorio);
         System.out.println("Salário final: " + calcularSalario());
 
     }
