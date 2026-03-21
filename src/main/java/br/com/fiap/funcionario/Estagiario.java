@@ -9,7 +9,7 @@ import jakarta.persistence.*;
 
 @Descricao(descricao = "estagiário")
 @Entity
-@Table(name = "Estagiario")
+
 
 public class Estagiario extends Funcionario {
 

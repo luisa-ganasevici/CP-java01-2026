@@ -5,13 +5,12 @@ import jakarta.persistence.*;
 
 @Descricao(descricao = "senior")
 @Entity
-@Table(name = "Senior")
+
 
 public class Senior extends Funcionario {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "colunaAvaliarRelatório")
+
+    @Column(name = "colunaAvaliarRelatorio")
 
     protected String avaliarRelatorio;
 

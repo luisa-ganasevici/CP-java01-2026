@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 @Descricao(descricao = "funcionario")
 @Entity
 @Table(name = "funcionario")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Funcionario {
 
     @Id

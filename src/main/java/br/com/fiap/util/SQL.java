@@ -3,18 +3,63 @@ package br.com.fiap.util;
 import br.com.fiap.anotacao.Descricao;
 import jakarta.persistence.Table;
 
+import java.lang.reflect.Field;
+
 public class SQL {
 
     public String gerarSelect(Object obj) {
-        Class<?> classe = obj.getClass();
-        String tabela = getNomeTabela(classe);
+        String tabela = getNomeTabela(obj.getClass());
         return "SELECT * FROM " + tabela;
     }
 
     public String gerarInsert(Object obj) {
         Class<?> classe = obj.getClass();
         String tabela = getNomeTabela(classe);
-        return "INSERT INTO " + tabela + " (VALORES DO OBJETO VIA REFLECTION)";
+
+        StringBuilder colunas = new StringBuilder();
+        StringBuilder valores = new StringBuilder();
+
+        Field[] fields = classe.getSuperclass().getDeclaredFields();
+        Field[] fieldsFilha = classe.getDeclaredFields();
+
+        Field[] todos = new Field[fields.length + fieldsFilha.length];
+        System.arraycopy(fields, 0, todos, 0, fields.length);
+        System.arraycopy(fieldsFilha, 0, todos, fields.length, fieldsFilha.length);
+
+        boolean primeiro = true;
+
+        for (Field field : todos) {
+            field.setAccessible(true);
+
+            // pula o id para o INSERT, já que ele é gerado pelo banco
+            if (field.getName().equalsIgnoreCase("id")) {
+                continue;
+            }
+
+            try {
+                Object valor = field.get(obj);
+
+                if (!primeiro) {
+                    colunas.append(", ");
+                    valores.append(", ");
+                }
+
+                colunas.append(field.getName());
+
+                if (valor instanceof String) {
+                    valores.append("'").append(valor).append("'");
+                } else {
+                    valores.append(valor);
+                }
+
+                primeiro = false;
+
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("Erro ao acessar o campo " + field.getName(), e);
+            }
+        }
+
+        return "INSERT INTO " + tabela + " (" + colunas + ") VALUES (" + valores + ")";
     }
 
     public String gerarDelete(Object obj, Long id) {
@@ -24,12 +69,17 @@ public class SQL {
     }
 
     private String getNomeTabela(Class<?> classe) {
+        Class<?> atual = classe;
 
-        if (classe.isAnnotationPresent(Descricao.class)) {
-            return classe.getAnnotation(Descricao.class).descricao();
-        } else if (classe.isAnnotationPresent(Table.class)) {
-            return classe.getAnnotation(Table.class).name();
+        while (atual != null && atual != Object.class) {
+            if (atual.isAnnotationPresent(Descricao.class)) {
+                return atual.getAnnotation(Descricao.class).descricao();
+            } else if (atual.isAnnotationPresent(Table.class)) {
+                return atual.getAnnotation(Table.class).name();
+            }
+            atual = atual.getSuperclass();
         }
+
         return classe.getSimpleName().toUpperCase();
     }
 }
