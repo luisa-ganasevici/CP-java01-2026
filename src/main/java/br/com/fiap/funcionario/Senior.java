@@ -49,11 +49,11 @@ public class Senior extends Funcionario {
     @Override
     public void imprimirInformacao() {
 
-        System.out.println("Funcionário Sênior: " + nome);
-        System.out.println("Horas trabalhadas: " + horasTrabalhadas);
-        System.out.println("Valor por hora: " + valorHora);
-        System.out.println("Avaliação do relatório: " + avaliarRelatorio);
-        System.out.println("Salário final com bônus: " + calcularSalario());
+        System.out.println("nome do sênior: " + nome);
+        System.out.println("horas trabalhadas: " + horasTrabalhadas);
+        System.out.println("valor por hora: " + valorHora);
+        System.out.println("avaliação do relatório: " + avaliarRelatorio);
+        System.out.println("salário final com o bonus: " + calcularSalario());
 
     }
 }

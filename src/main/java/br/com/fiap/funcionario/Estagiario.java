@@ -43,11 +43,11 @@ public class Estagiario extends Funcionario {
     @Override
     public void imprimirInformacao() {
 
-        System.out.println("Funcionário Estagiário: " + nome);
-        System.out.println("Horas trabalhadas: " + horasTrabalhadas);
-        System.out.println("Valor por hora: " + valorHora);
+        System.out.println("nome do estagiário: " + nome);
+        System.out.println("horas trabalhadas: " + horasTrabalhadas);
+        System.out.println("valor por hora: " + valorHora);
         System.out.println("relatorio: " + relatorio);
-        System.out.println("Salário final: " + calcularSalario());
+        System.out.println("salário final: " + calcularSalario());
 
     }
 }

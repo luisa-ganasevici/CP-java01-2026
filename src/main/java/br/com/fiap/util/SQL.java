@@ -31,7 +31,7 @@ public class SQL {
         for (Field field : todos) {
             field.setAccessible(true);
 
-            // pula o id para o INSERT, já que ele é gerado pelo banco
+
             if (field.getName().equalsIgnoreCase("id")) {
                 continue;
             }
@@ -55,7 +55,7 @@ public class SQL {
                 primeiro = false;
 
             } catch (IllegalAccessException e) {
-                throw new RuntimeException("Erro ao acessar o campo " + field.getName(), e);
+                throw new RuntimeException("erro ao acessar: " + field.getName(), e);
             }
         }
 

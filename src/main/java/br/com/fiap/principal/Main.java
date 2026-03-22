@@ -10,11 +10,11 @@ import jakarta.persistence.Persistence;
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("ANTES DO FACTORY");
+        System.out.println("antes do factory");
 
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("oracle-fiap");
 
-        System.out.println("DEPOIS DO FACTORY");
+        System.out.println("pós factory");
 
         EntityManager em = factory.createEntityManager();
 
@@ -22,10 +22,10 @@ public class Main {
 
         try {
 
-            Senior senior = new Senior("Carlos Alberto", 160, 80.0, "Relatório de TI Aprovado");
-            Estagiario estagiario = new Estagiario("Luisa", 40, 25.0, "Projeto Java Advanced");
+            Senior senior = new Senior("Carlos ", 160, 80.0, "relatorio aprovado");
+            Estagiario estagiario = new Estagiario("Luisa", 40, 25.0, "projeto de java");
 
-            System.out.println("\n--- [ETAPA 1 - CREATE] ---");
+            System.out.println("\n create ");
 
             System.out.println("SQL Gerado: " + sqlTool.gerarInsert(senior));
             System.out.println("SQL Gerado: " + sqlTool.gerarInsert(estagiario));
@@ -34,28 +34,28 @@ public class Main {
             em.persist(senior);
             em.persist(estagiario);
             em.getTransaction().commit();
-            System.out.println("Funcionários persistidos no Oracle com sucesso!");
+            System.out.println("funcionarios registrados");
 
             senior.imprimirInformacao();
             estagiario.imprimirInformacao();
 
-            System.out.println("\n--- [ETAPA 2 - READ] ---");
+            System.out.println("\n read");
 
-            System.out.println("SQL Gerado: " + sqlTool.gerarSelect(senior));
+            System.out.println("SQL: " + sqlTool.gerarSelect(senior));
 
             Senior buscado = em.find(Senior.class, senior.getId());
             if (buscado != null) {
                 buscado.imprimirInformacao();
             }
 
-            System.out.println("\n--- [ETAPA 3 - UPDATE] ---");
+            System.out.println("\n update");
 
             em.getTransaction().begin();
 
             Estagiario estagiarioUpdate = em.find(Estagiario.class, estagiario.getId());
 
             if (estagiarioUpdate != null) {
-                estagiarioUpdate.setRelatorio("Relatório Final do Checkpoint 1");
+                estagiarioUpdate.setRelatorio("relatorio");
 
                 System.out.println("Simulando SQL Update: UPDATE "
                         + estagiarioUpdate.getClass().getSimpleName().toUpperCase()
@@ -65,11 +65,11 @@ public class Main {
             }
 
             em.getTransaction().commit();
-            System.out.println("Dados do estagiário atualizados!");
+            System.out.println("dados do estagiario atualizados");
 
-            System.out.println("\n--- [ETAPA 4 - DELETE] ---");
+            System.out.println("\n delete");
 
-            System.out.println("SQL Gerado: " + sqlTool.gerarDelete(senior, senior.getId()));
+            System.out.println("SQL: " + sqlTool.gerarDelete(senior, senior.getId()));
 
             em.getTransaction().begin();
 
@@ -79,7 +79,7 @@ public class Main {
             }
 
             em.getTransaction().commit();
-            System.out.println("Funcionário Sênior removido do banco.");
+            System.out.println("Sênior removido do banco");
 
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
