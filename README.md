@@ -1,40 +1,44 @@
-# Projeto Java - CRUD com JPA e Hibernate (Oracle)
+README 
 
-## Descrição
+Projeto Java, CP 01 - CRUD com JPA, Hibernate e Oracle
 
-Este projeto demonstra a implementação de um CRUD completo utilizando Java, JPA (Jakarta Persistence) e Hibernate, com persistência em banco de dados Oracle.
+Descrição
+Este projeto implementa um CRUD completo utilizando Java, JPA (Jakarta Persistence) e Hibernate, com persistência em banco de dados Oracle developer.
 
-O sistema modela uma hierarquia de funcionários, utilizando herança em JPA, além de aplicar reflection para geração de comandos SQL dinâmicos.
+O sistema modela uma hierarquia de funcionários utilizando herança com a estratégia JOINED e também utiliza reflection para gerar comandos SQL por meio de uma classe utilitária.
 
-## Estrutura do Projeto
+Durante a execução da main, o sistema realiza operações de criação, leitura, atualização e remoção de dados, além de exibir os comandos SQL simulados e os gerados automaticamente pelo Hibernate.
+
+Estrutura do Projeto
 
 Pacote br.com.fiap.funcionario
-Contém as entidades do sistema: Funcionario, Senior e Estagiario.
+entidades do sistema: Funcionario, Senior e Estagiario. A estrutura utiliza herança com JPA.
 
 Pacote br.com.fiap.principal
-Contém a classe Main responsável pela execução do sistema.
+classe Main responsável pela execução do sistema e teste das operações CRUD.
 
 Pacote br.com.fiap.util
-Contém a classe SQL responsável pela geração de comandos SQL via reflection.
+classe SQL responsável pela geração de comandos SQL dinamicamente utilizando reflection.
 
 Pacote br.com.fiap.anotacao
-Contém a anotação personalizada Descricao.
+anotação personalizada Descricao, utilizada para definir o nome das tabelas dinamicamente.
 
-## Conceitos Utilizados
+Conceitos Utilizados
 
 JPA (Jakarta Persistence API)
 Hibernate ORM
 Mapeamento objeto-relacional (ORM)
 Herança com estratégia JOINED
-Anotações como Entity, Table, Column, Id e GeneratedValue
-Reflection para geração de SQL
+Anotações (@Entity, @Table, @Column, @Id, @GeneratedValue, @Inheritance)
+Reflection em Java
+Geração dinâmica de SQL
 Operações CRUD (Create, Read, Update, Delete)
-Conexão com banco Oracle via JDBC
+Conexão com banco Oracle developer via JDBC
 
-## Entidades
+Entidades
 
 Funcionario
-Classe base do sistema contendo os atributos id, nome, horasTrabalhadas e valorHora. Possui método para cálculo de salário base.
+Classe base do sistema. Contém os atributos id, nome, horasTrabalhadas e valorHora. Possui método para cálculo de salário base e serve como superclasse para as demais entidades.
 
 Estagiario
 Classe que herda de Funcionario. Possui o atributo relatorio e aplica um desconto de 20% no cálculo do salário.
@@ -42,52 +46,65 @@ Classe que herda de Funcionario. Possui o atributo relatorio e aplica um descont
 Senior
 Classe que herda de Funcionario. Possui o atributo avaliarRelatorio e adiciona bônus ao salário com base nas horas trabalhadas.
 
-## Funcionalidades
+Funcionalidades
 
 Create
-Criação e persistência de objetos no banco de dados.
+Criação e persistência de objetos no banco de dados utilizando EntityManager.
 
 Read
-Consulta de registros utilizando o identificador.
+Consulta de registros a partir do identificador utilizando o método find.
 
 Update
-Atualização de dados de um registro existente.
+Atualização de dados de um registro existente utilizando merge.
 
 Delete
-Remoção de registros do banco de dados.
+Remoção de registros do banco de dados utilizando remove.
 
-## Classe Utilitária SQL
+Classe Utilitária SQL
 
 A classe SQL é responsável por gerar comandos SQL dinamicamente utilizando reflection.
 
+Ela identifica automaticamente os atributos das classes e monta comandos SQL com base nos dados dos objetos.
+
 Principais métodos:
-gerarSelect
 gerarInsert
+gerarSelect
 gerarDelete
 
-## Configuração do Banco
+Configuração do Banco
 
-As configurações de conexão estão definidas no arquivo persistence.xml, incluindo driver JDBC, URL, usuário, senha, dialeto do Hibernate e estratégia de geração de tabelas.
+As configurações estão definidas no arquivo persistence.xml, incluindo:
 
-## Execução do Projeto
+Driver JDBC do Oracle
+URL de conexão com o banco
+Usuário e senha
+Dialeto do Hibernate
+Estratégia de geração de tabelas (create)
+
+O Hibernate é responsável por criar automaticamente as tabelas no banco de dados com base nas entidades.
+
+Execução do Projeto
 
 Compilar o projeto utilizando Maven.
 Executar a classe Main.
 
-Durante a execução são exibidos os comandos SQL gerados e as operações realizadas no banco de dados.
+Durante a execução, o sistema:
 
-## Tecnologias Utilizadas
+Cria registros no banco
+Consulta dados
+Atualiza informações
+Remove registros
+Exibe os comandos SQL gerados
 
-Java 21 ou superior
+Tecnologias Utilizadas
+
+Java 21
 Hibernate 6
 Jakarta Persistence 3.1
 Oracle JDBC Driver
 Maven
 
-## Autor
 
-Projeto desenvolvido para fins acadêmicos.
 
-## Observação
 
-O projeto tem como objetivo demonstrar o uso de persistência com JPA e Hibernate, além da aplicação de conceitos de orientação a objetos como herança e uso de reflection.
+O projeto tem como objetivo demonstrar o uso de persistência com JPA e Hibernate, aplicação de herança em banco de dados relacional e uso de reflection para geração dinâmica de comandos SQL.
