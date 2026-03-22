@@ -27,8 +27,8 @@ public class Main {
 
             System.out.println("\n create ");
 
-            System.out.println("SQL Gerado: " + sqlTool.gerarInsert(senior));
-            System.out.println("SQL Gerado: " + sqlTool.gerarInsert(estagiario));
+            System.out.println("SQL gerado: " + sqlTool.gerarInsert(senior));
+            System.out.println("SQL gerado: " + sqlTool.gerarInsert(estagiario));
 
             em.getTransaction().begin();
             em.persist(senior);
@@ -39,7 +39,7 @@ public class Main {
             senior.imprimirInformacao();
             estagiario.imprimirInformacao();
 
-            System.out.println("\n read");
+            System.out.println("\nread");
 
             System.out.println("SQL: " + sqlTool.gerarSelect(senior));
 
@@ -48,7 +48,7 @@ public class Main {
                 buscado.imprimirInformacao();
             }
 
-            System.out.println("\n update");
+            System.out.println("\nupdate");
 
             em.getTransaction().begin();
 
@@ -67,7 +67,7 @@ public class Main {
             em.getTransaction().commit();
             System.out.println("dados do estagiario atualizados");
 
-            System.out.println("\n delete");
+            System.out.println("\ndelete");
 
             System.out.println("SQL: " + sqlTool.gerarDelete(senior, senior.getId()));
 
