@@ -40,7 +40,7 @@ public class Funcionario {
 
     }
 
-    public void infoFuncionario() {
+    public void imprimirInformacao() {
 
         System.out.println("funcionario" + nome);
         System.out.println("quantidade de horas de trabalho " + horasTrabalhadas);

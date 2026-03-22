@@ -9,7 +9,8 @@ import jakarta.persistence.*;
 
 public class Senior extends Funcionario {
 
-
+    public Senior() {
+    }
     @Column(name = "colunaAvaliarRelatorio")
 
     protected String avaliarRelatorio;
@@ -46,7 +47,7 @@ public class Senior extends Funcionario {
     }
 
     @Override
-    public void infoFuncionario() {
+    public void imprimirInformacao() {
 
         System.out.println("Funcionário Sênior: " + nome);
         System.out.println("Horas trabalhadas: " + horasTrabalhadas);

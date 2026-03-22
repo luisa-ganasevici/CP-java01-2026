@@ -36,8 +36,8 @@ public class Main {
             em.getTransaction().commit();
             System.out.println("Funcionários persistidos no Oracle com sucesso!");
 
-            senior.infoFuncionario();
-            estagiario.infoFuncionario();
+            senior.imprimirInformacao();
+            estagiario.imprimirInformacao();
 
             System.out.println("\n--- [ETAPA 2 - READ] ---");
 
@@ -45,7 +45,7 @@ public class Main {
 
             Senior buscado = em.find(Senior.class, senior.getId());
             if (buscado != null) {
-                buscado.infoFuncionario();
+                buscado.imprimirInformacao();
             }
 
             System.out.println("\n--- [ETAPA 3 - UPDATE] ---");
